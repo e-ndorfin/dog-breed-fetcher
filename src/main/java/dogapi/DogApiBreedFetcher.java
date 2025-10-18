@@ -37,7 +37,6 @@ public class DogApiBreedFetcher implements BreedFetcher {
             if ("error".equalsIgnoreCase(status) || response.code() == 404) {
                 throw new BreedNotFoundException(breed);
             }
-            // expected: {"message":["sub1","sub2"], "status":"success"}
             Object message = obj.get("message");
             List<String> result = new ArrayList<>();
             if (message instanceof JSONArray) {
@@ -46,7 +45,6 @@ public class DogApiBreedFetcher implements BreedFetcher {
                     result.add(arr.getString(i));
                 }
             } else if (message instanceof String) {
-                // sometimes message could be empty string or similar
                 String s = (String) message;
                 if (!s.isEmpty()) {
                     result.add(s);
